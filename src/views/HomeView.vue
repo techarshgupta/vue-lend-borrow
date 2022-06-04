@@ -126,10 +126,10 @@ const getTotal = computed(() => {
             </div>
             <div>Sort</div>
           </header>
-          <bl-list
+          <!-- <bl-list
             class="h-[450px] overflow-scroll w-full"
             :data="data"
-          ></bl-list>
+          ></bl-list> -->
         </div>
       </div>
     </div>

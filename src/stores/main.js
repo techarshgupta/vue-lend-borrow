@@ -93,11 +93,13 @@ export const useMainStore = defineStore("main", {
       label: "usd",
       icon: "$",
     },
+    users: [],
   }),
   getters: {
     doubleCount: (state) => state.counter * 2,
     getTransactions: (state) => state.transactions,
     getCurrency: (state) => state.currenncy,
+    getUsers: (state) => state.users,
   },
   actions: {
     increment() {
@@ -116,6 +118,9 @@ export const useMainStore = defineStore("main", {
     },
     setCurrency(val) {
       this.currenncy = val;
+    },
+    addUser(data) {
+      this.users.push(data);
     },
   },
   persist: true,
