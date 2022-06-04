@@ -16,7 +16,7 @@ import { RouterView } from "vue-router";
       <div class="header fixed z-40 w-full click-collapse">
         <nav-bar />
       </div>
-      <div class="body pt-24 px-4 fixed overflow-hidden">
+      <div class="body pt-24 px-4">
         <RouterView />
       </div>
     </div>
