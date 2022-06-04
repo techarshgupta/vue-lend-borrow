@@ -35,6 +35,10 @@ const props = defineProps({
     type: [String, Number, Boolean, Array, Object],
     default: "",
   },
+  h: {
+    type: String,
+    default: "h-12",
+  },
   required: Boolean,
   borderless: Boolean,
   transparent: Boolean,
@@ -53,10 +57,10 @@ const computedValue = computed({
 const inputElClass = computed(() => {
   const base = [
     "px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full",
-    "dark:placeholder-gray-400",
-    computedType.value === "textarea" ? "h-24" : "h-12",
+    "dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500",
+    computedType.value === "textarea" ? "h-24" : props.h,
     props.borderless ? "border-0" : "border",
-    props.transparent ? "bg-transparent" : "bg-white dark:bg-gray-800",
+    props.transparent ? "bg-transparent" : "bg-white dark:bg-gray-700",
   ];
 
   if (props.icon) {

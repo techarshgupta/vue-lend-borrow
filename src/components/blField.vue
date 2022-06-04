@@ -15,7 +15,7 @@ defineProps({
 const slots = useSlots();
 
 const wrapperClass = computed(() => {
-  const base = [];
+  const base = ["dark:text-gray-200"];
   const slotsLength = slots.default().length;
 
   if (slotsLength > 1) {
@@ -32,7 +32,9 @@ const wrapperClass = computed(() => {
 
 <template>
   <div class="mb-6 last:mb-0">
-    <label v-if="label" class="block font-bold mb-2">{{ label }}</label>
+    <label v-if="label" class="block font-bold mb-2 dark:text-gray-200">{{
+      label
+    }}</label>
     <div :class="wrapperClass">
       <slot />
     </div>

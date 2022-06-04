@@ -86,7 +86,7 @@ const componentClass = computed(() => {
     "focus:ring",
     "duration-150",
     "rounded",
-    props.active ? "ring ring-black dark:ring-white" : "ring-blue-700",
+    props.active ? "ring ring-black dark:ring-white" : "ring-teal-700",
     props.small ? "p-1" : "p-2",
     getButtonColor(props.category, props.color, props.outline, !props.disabled),
   ];

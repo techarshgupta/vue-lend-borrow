@@ -1,53 +1,63 @@
 <template>
   <aside
-    class="sidebar fixed bg-white flex flex-col left-0 min-h-screen top-0 px-4 shadow-2xl z-20 click-collapse"
+    class="sidebar fixed bg-white flex flex-col left-0 min-h-screen top-0 px-4 shadow-2xl z-20 click-collapse dark:bg-gray-800"
   >
-    <div class="flex my-8 items-center cursor-pointer h-8">Lend & Borrow</div>
+    <div class="flex my-8 items-center text-teal-500 text-lg font-semibold">
+      Lend & Borrow
+    </div>
 
-    <nav class="inline-flex flex-col space-y-2 bg-white">
+    <nav class="inline-flex flex-col space-y-2">
       <router-link
         v-for="(link, index) in navLinks"
         :key="index"
         :to="link.path"
-        class="flex items-center text-gray-600 py-2 cursor-pointer hover:bg-gray-100 pl-2 pr-6 rounded-lg"
+        class="flex items-center text-gray-600 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-400 pl-2 pr-6 rounded-lg"
       >
-        <!-- <img
-          :src="link.icon"
-          class="w-8 h-8 p-1"
-          :class="{ 'mr-4': navExpand || isMobile }"
-        /> -->
-        <span v-html="link.text" class="font-medium select-none"></span>
+        <bl-icon
+          v-if="link.icon"
+          :path="link.icon"
+          class="flex-none"
+          size="24"
+        />
+        <span v-html="link.text" class="font-medium select-none ml-2"></span>
       </router-link>
     </nav>
   </aside>
 </template>
 
 <script setup>
-// import { useStore } from "@/store";
 import { ref } from "vue";
+import BlIcon from "../components/blIcon.vue";
+import {
+  mdiAccountGroup,
+  mdiAccountPlusOutline,
+  mdiCog,
+  mdiHome,
+  mdiLogout,
+} from "@mdi/js";
 const navLinks = ref([
   {
-    // icon: require("@/assets/icon/overview.svg"),
+    icon: mdiHome,
     text: "Home",
     path: "/dashboard",
   },
   {
-    // icon: require("@/assets/icon/briefcase.svg"),
+    icon: mdiAccountGroup,
     text: "Groups",
     path: "/groups",
   },
   {
-    // icon: require("@/assets/icon/workflow.svg"),
+    icon: mdiCog,
     text: "Settings",
     path: "/settings",
   },
   {
-    // icon: require("@/assets/icon/mojometer.svg"),
+    icon: mdiAccountPlusOutline,
     text: "Invite",
     path: "/invite",
   },
   {
-    // icon: require("@/assets/icon/book.svg"),
+    icon: mdiLogout,
     text: "Logout",
     path: "/logout",
   },

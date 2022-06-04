@@ -54,6 +54,16 @@ const router = createRouter({
           name: "Invite",
           component: () => import("../views/inviteView.vue"),
         },
+        {
+          path: "/expense",
+          name: "Expenses",
+          component: () => import("../views/expenseView.vue"),
+        },
+        {
+          path: "/settle",
+          name: "Settle",
+          component: () => import("../views/settleView.vue"),
+        },
       ],
     },
   ],

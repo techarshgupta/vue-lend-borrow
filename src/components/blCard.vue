@@ -83,7 +83,7 @@ const submit = (e) => {
       <a
         v-if="computedHeaderIcon"
         href="#"
-        class="flex items-center py-3 px-4 justify-center ring-blue-700 focus:ring"
+        class="flex items-center py-3 px-4 justify-center ring-teal-700 focus:ring"
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
