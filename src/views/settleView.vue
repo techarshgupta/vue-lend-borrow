@@ -24,6 +24,7 @@
           id="table-search"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-80 pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
           placeholder="Search for items"
+          v-model="search"
         />
       </div>
     </div>
@@ -82,10 +83,22 @@
 import blButton from "../components/blButton.vue";
 
 import { useMainStore } from "@/stores/main";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 const mainStore = useMainStore();
 const getCurrency = computed(() => mainStore.getCurrency);
-const getTransactions = computed(() => mainStore.getTransactions);
+
+const search = ref(null);
+const getTransactions = computed(() => {
+  if (!search.value) {
+    return mainStore.getTransactions;
+  } else {
+    return mainStore.getTransactions.filter((item) => {
+      return Object.values(item).some((word) =>
+        String(word).toLowerCase().includes(search.value)
+      );
+    });
+  }
+});
 
 const onClickPay = (tr) => {
   let text = "Are you sure you want to settle your borrow!";
