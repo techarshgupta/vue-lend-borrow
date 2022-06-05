@@ -133,10 +133,7 @@ const router = useRouter();
 const addTransaction = () => {
   if (validator()) {
     console.log("form", form);
-    // if (getCurrency.value.label.toLowerCase() === "inr") {
-    //   form.amount = form.amount * 70;
-    // }
-    mainStore.addTransaction(form);
+    mainStore.addTransaction({ ...form, user: form.user.label });
     const payload = {
       type: form.type.value,
       title:

@@ -84,9 +84,7 @@ const getTotal = computed(() => {
           </div>
         </div>
       </div>
-      <div
-        class="w-2/5 border shadow-md rounded dark:border-gray-800 dark:shadow-gray-800 p-4"
-      >
+      <div class="w-2/5 border shadow-md rounded dark:border-gray-800 p-4">
         <bl-chart />
       </div>
     </div>

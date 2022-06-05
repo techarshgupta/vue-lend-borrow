@@ -6,20 +6,9 @@
       class="flex items-center p-4 border-b mb-0.5 bg-white dark:bg-gray-800 dark:border-gray-700"
     >
       <div
-        class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+        class="w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 flex items-center justify-center dark:text-white"
       >
-        <svg
-          class="absolute w-12 h-12 text-gray-400 -left-1"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
+        <bl-icon :path="getIcon(item.type)" class="flex-none" size="24" />
       </div>
       <div class="pl-2">
         <div class="dark:text-gray-400" v-if="item.title">{{ item.title }}</div>
@@ -49,6 +38,13 @@
 <script setup>
 import { useMainStore } from "@/stores/main";
 import { computed } from "vue";
+import BlIcon from "../components/blIcon.vue";
+import {
+  mdiAccount,
+  mdiAccountCashOutline,
+  mdiAccountGroup,
+  mdiAccountPlusOutline,
+} from "@mdi/js";
 const mainStore = useMainStore();
 const getCurrency = computed(() => mainStore.getCurrency);
 
@@ -58,4 +54,29 @@ defineProps({
     default: null,
   },
 });
+
+const getIcon = (type) => {
+  let icon = "";
+  switch (type) {
+    case "debit":
+      icon = mdiAccountCashOutline;
+      break;
+    case "group":
+      icon = mdiAccountGroup;
+      break;
+    case "credit":
+      icon = mdiAccountCashOutline;
+      break;
+    case "user":
+      icon = mdiAccount;
+      break;
+    case "invite":
+      icon = mdiAccountPlusOutline;
+      break;
+    default:
+      icon = mdiAccount;
+      break;
+  }
+  return icon;
+};
 </script>

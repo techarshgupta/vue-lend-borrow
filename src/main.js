@@ -10,7 +10,9 @@ import "./assets/css/app.scss";
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 const app = createApp(App);
-
+if (!localStorage.getItem("color-theme")) {
+  localStorage.setItem("color-theme", "dark");
+}
 app.use(pinia);
 app.use(router);
 
