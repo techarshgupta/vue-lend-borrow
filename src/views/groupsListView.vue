@@ -62,7 +62,7 @@
             {{ group.name }}
           </th>
           <td class="px-6 py-4 capitalize">{{ group.type }}</td>
-          <td class="px-6 py-4 capitalize">{{ group.members }}</td>
+          <td class="px-6 py-4 capitalize">{{ group.members?.length }}</td>
           <td class="px-6 py-4 capitalize">{{ group.status }}</td>
           <td class="px-6 py-4 capitalize">
             <bl-button
@@ -72,32 +72,83 @@
               outline
               label="Add Peoples"
               class="px-6"
+              @click="[(modalVisible = true), (activeGrp = group)]"
             />
           </td>
         </tr>
       </tbody>
     </table>
+    <bl-modal
+      v-if="modalVisible"
+      :isVisible="modalVisible"
+      @cancel="modalVisible = false"
+    >
+      <template #title>
+        <p class="text-base dark:text-gray-300">Add User in group</p>
+      </template>
+      <template #body>
+        <div class="flex flex-col">
+          <div class="text-lg dark:text-gray-300 my-6">
+            Group Name:
+            <span class="font-semibold">{{ activeGrp?.name }}</span>
+          </div>
+          <bl-field label="User *" help="Please select user">
+            <bl-control
+              v-model="user"
+              type="select"
+              name="user"
+              :options="users"
+              autocomplete="user"
+            />
+          </bl-field>
+          <bl-button
+            type="submit"
+            color="info"
+            label="Add User"
+            class="px-6 mt-5"
+            @click="onAddUser"
+          />
+        </div>
+      </template>
+    </bl-modal>
   </div>
 </template>
 
 <script setup>
 import blButton from "../components/blButton.vue";
+import blModal from "../components/blModal.vue";
+import BlField from "../components/blField.vue";
+import blControl from "../components/blControl.vue";
 import { useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 const mainStore = useMainStore();
 const getGroups = computed(() => mainStore.getGroups);
-// const getTransactions = computed(() => mainStore.getTransactions);
 
-// const onClickPay = (id) => {
-//   let text = "Are you sure you want to pay your borrow!";
-//   if (confirm(text) == true) {
-//     console.log(id);
-//     mainStore.settlePay(id);
-//   }
-// };
+const users = computed(() => mainStore.getUsers);
+const modalVisible = ref(false);
+const activeGrp = ref(null);
+const user = ref(null);
 const router = useRouter();
 const onAddGroup = () => {
   router.push({ path: "/add-group" });
+};
+const onAddUser = () => {
+  if (user.value && user.value !== "") {
+    const payload = {
+      type: "user",
+      title: "you added a user in group",
+      date: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+    };
+    mainStore.addActivity(payload);
+    mainStore.addGroupMember(activeGrp.value.id, user.value.label);
+    modalVisible.value = false;
+    activeGrp.value = null;
+    user.value = null;
+  }
 };
 </script>

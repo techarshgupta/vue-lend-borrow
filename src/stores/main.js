@@ -13,7 +13,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "2345",
         status: "unpaid",
       },
       {
@@ -25,7 +25,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "1456",
         status: "unpaid",
       },
       {
@@ -37,7 +37,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "2398",
         status: "unpaid",
       },
       {
@@ -49,7 +49,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "9873",
         status: "unpaid",
       },
       {
@@ -61,7 +61,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "8756",
         status: "unpaid",
       },
       {
@@ -73,7 +73,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "5657",
         status: "unpaid",
       },
       {
@@ -85,7 +85,7 @@ export const useMainStore = defineStore("main", {
         },
         date: "2022-06-22",
         reason: "test",
-        amount: "12343",
+        amount: "4907",
         status: "paid",
       },
     ],
@@ -105,19 +105,28 @@ export const useMainStore = defineStore("main", {
         name: "Site Workers",
         type: "Constructions",
         status: "active",
+        members: [],
       },
       {
         id: "4b19j",
         name: "Electricians",
         type: "Technicals",
         status: "active",
+        members: [],
       },
-      { id: "znrrx", name: "Designers", type: "Engineers", status: "inactive" },
+      {
+        id: "znrrx",
+        name: "Designers",
+        type: "Engineers",
+        status: "inactive",
+        members: [],
+      },
       {
         id: "zpk3h",
         name: "Site interiors",
         type: "Interiors",
         status: "inactive",
+        members: [],
       },
     ],
     activities: [
@@ -178,7 +187,11 @@ export const useMainStore = defineStore("main", {
       this.groups.push(data);
     },
     addActivity(data) {
-      this.activities.push(data);
+      this.activities.unshift(data);
+    },
+    addGroupMember(id, user) {
+      const idx = this.groups.findIndex((gr) => gr.id === id);
+      this.groups[idx].members.push(user);
     },
   },
   persist: true,

@@ -67,6 +67,16 @@ const router = useRouter();
 const addUser = () => {
   if (validator()) {
     console.log("form", form);
+    const payload = {
+      type: "invite",
+      title: "You send an invitation",
+      date: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+    };
+    mainStore.addActivity(payload);
     mainStore.addUser(form);
     router.push({ path: "/dashboard" });
   }

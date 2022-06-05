@@ -84,7 +84,9 @@ const getTotal = computed(() => {
           </div>
         </div>
       </div>
-      <div class="w-2/5 border shadow-md">
+      <div
+        class="w-2/5 border shadow-md rounded dark:border-gray-800 dark:shadow-gray-800 p-4"
+      >
         <bl-linechart />
       </div>
     </div>
@@ -102,7 +104,7 @@ const getTotal = computed(() => {
             <div>Sort</div>
           </header>
           <bl-list
-            class="h-[450px] overflow-y-auto w-full"
+            class="h-[450px] overflow-y-auto w-full border-r-gray-200 border-r dark:border-r dark:border-gray-800"
             :data="getOweTransaction"
           ></bl-list>
         </div>
@@ -129,7 +131,7 @@ const getTotal = computed(() => {
             <div class="text-xl font-semibold dark:text-gray-400">
               Recent Activity
             </div>
-            <div>Sort</div>
+            <!-- <div>Sort</div> -->
           </header>
           <bl-activity
             class="h-[450px] overflow-y-auto w-full"

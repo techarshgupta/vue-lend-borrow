@@ -69,7 +69,7 @@
               outline
               label="Pay"
               class="px-6"
-              @click="onClickPay(tr.id)"
+              @click="onClickPay(tr)"
             />
           </td>
         </tr>
@@ -87,11 +87,22 @@ const mainStore = useMainStore();
 const getCurrency = computed(() => mainStore.getCurrency);
 const getTransactions = computed(() => mainStore.getTransactions);
 
-const onClickPay = (id) => {
-  let text = "Are you sure you want to pay your borrow!";
+const onClickPay = (tr) => {
+  let text = "Are you sure you want to settle your borrow!";
   if (confirm(text) == true) {
-    console.log(id);
-    mainStore.settlePay(id);
+    console.log(tr);
+    const payload = {
+      type: "credit",
+      title: "You settled amount",
+      amount: tr.amount,
+      date: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+    };
+    mainStore.addActivity(payload);
+    mainStore.settlePay(tr.id);
   }
 };
 </script>

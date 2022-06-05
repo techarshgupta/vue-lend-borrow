@@ -130,6 +130,20 @@ const addTransaction = () => {
   if (validator()) {
     console.log("form", form);
     mainStore.addTransaction(form);
+    const payload = {
+      type: form.type.value,
+      title:
+        form.type.value === "credit"
+          ? "You settled amount"
+          : "You added transaction",
+      amount: form.amount,
+      date: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+    };
+    mainStore.addActivity(payload);
     router.push({ path: "/dashboard" });
   }
 };

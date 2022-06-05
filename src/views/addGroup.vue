@@ -51,6 +51,7 @@ const form = reactive({
   name: "",
   type: "",
   status: "",
+  members: [],
 });
 const validator = () => {
   if (!form.name && form.name == "") {
@@ -75,6 +76,16 @@ const addGroup = () => {
   if (validator()) {
     console.log("form", form);
     mainStore.addGroup(form);
+    const payload = {
+      type: "group",
+      title: `You created group ${form.name}`,
+      date: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+    };
+    mainStore.addActivity(payload);
     router.push({ path: "/groups" });
   }
 };
