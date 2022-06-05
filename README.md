@@ -11,7 +11,7 @@ People have a habit of borrowing money from each other frequently, and have trou
 
 ## Demo
 
-https://techarshgupta.github.io/vue-lend-borrow/dashboard
+https://techarshgupta.github.io/vue-lend-borrow/
 
 
 ## Features
