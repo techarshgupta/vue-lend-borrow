@@ -13,7 +13,6 @@
         name="currency"
         autocomplete="currency"
         h="min-content"
-        @update:model-value="setCurrency"
       />
     </bl-field>
 
@@ -58,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useMainStore } from "@/stores/main";
 import blControl from "../components/blControl.vue";
 import blField from "../components/blField.vue";
@@ -66,9 +65,11 @@ import blField from "../components/blField.vue";
 const mainStore = useMainStore();
 
 const activeTheme = ref("light");
-const currency = ref({
-  label: "USD",
-  icon: "$",
+const currency = computed({
+  get: () => mainStore.getCurrency,
+  set: (value) => {
+    mainStore.setCurrency(value);
+  },
 });
 const currencyOptions = [
   {
@@ -103,10 +104,5 @@ const toggleTheme = () => {
       activeTheme.value = "dark";
     }
   }
-};
-
-const setCurrency = (val) => {
-  currency.value = val;
-  mainStore.setCurrency(currency.value);
 };
 </script>

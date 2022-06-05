@@ -179,6 +179,15 @@ export const useMainStore = defineStore("main", {
     },
     setCurrency(val) {
       this.currenncy = val;
+      if (this.currenncy.label.toLowerCase() === "usd") {
+        this.transactions = this.transactions.map((item) => {
+          return { ...item, amount: parseInt(item.amount, 10) / 70 };
+        });
+      } else {
+        this.transactions = this.transactions.map((item) => {
+          return { ...item, amount: parseInt(item.amount, 10) * 70 };
+        });
+      }
     },
     addUser(data) {
       this.users.push(data);

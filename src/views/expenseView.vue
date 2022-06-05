@@ -9,7 +9,10 @@
       Add a transaction by filling in below following fields
     </p>
     <p class="text-red-500 leading-relaxed mb-5">{{ errMsg }}</p>
-    <bl-field label="Amount *" help="Please enter amount">
+    <bl-field
+      :label="`Amount * ${getCurrency.icon}`"
+      help="Please enter amount"
+    >
       <bl-control
         v-model="form.amount"
         type="number"
@@ -88,6 +91,7 @@ const form = reactive({
   amount: "",
   status: "unpaid",
 });
+const getCurrency = computed(() => mainStore.getCurrency);
 const users = computed(() => mainStore.getUsers);
 const types = computed(() => [
   {
@@ -129,6 +133,9 @@ const router = useRouter();
 const addTransaction = () => {
   if (validator()) {
     console.log("form", form);
+    // if (getCurrency.value.label.toLowerCase() === "inr") {
+    //   form.amount = form.amount * 70;
+    // }
     mainStore.addTransaction(form);
     const payload = {
       type: form.type.value,

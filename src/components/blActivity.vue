@@ -3,7 +3,7 @@
     <div
       v-for="(item, idx) in data"
       :key="idx"
-      class="flex items-center p-4 border-b mb-0.5 dark:border-b-gray-800"
+      class="flex items-center p-4 border-b mb-0.5 bg-white dark:bg-gray-800 dark:border-gray-700"
     >
       <div
         class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"

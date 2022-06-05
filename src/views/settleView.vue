@@ -1,6 +1,6 @@
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="p-4">
+    <div class="py-4">
       <label for="table-search" class="sr-only">Search</label>
       <div class="relative mt-1">
         <div
