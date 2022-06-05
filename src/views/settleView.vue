@@ -1,30 +1,41 @@
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="py-4">
-      <label for="table-search" class="sr-only">Search</label>
-      <div class="relative mt-1">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-        >
-          <svg
-            class="w-5 h-5 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+    <div class="py-4 flex items-center justify-between">
+      <div>
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative mt-1">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+            <svg
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="table-search"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-80 pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+            placeholder="Search for items"
+            v-model="search"
+          />
         </div>
-        <input
-          type="text"
-          id="table-search"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-80 pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-          placeholder="Search for items"
-          v-model="search"
+      </div>
+      <div class="pr-2">
+        <bl-control
+          v-model="sorted"
+          :options="sortOptions"
+          name="currency"
+          autocomplete="currency"
+          h="min-content"
         />
       </div>
     </div>
@@ -74,6 +85,12 @@
             />
           </td>
         </tr>
+        <tr
+          class="w-full text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-gray-600 dark:text-gray-400"
+          v-if="getTransactions.length === 0"
+        >
+          <td class="py-10" colspan="7">No items found</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -81,7 +98,7 @@
 
 <script setup>
 import blButton from "../components/blButton.vue";
-
+import blControl from "../components/blControl.vue";
 import { useMainStore } from "@/stores/main";
 import { computed, ref } from "vue";
 const mainStore = useMainStore();
@@ -89,15 +106,23 @@ const getCurrency = computed(() => mainStore.getCurrency);
 
 const search = ref(null);
 const getTransactions = computed(() => {
+  let temp;
   if (!search.value) {
-    return mainStore.getTransactions;
+    temp = mainStore.getTransactions;
   } else {
-    return mainStore.getTransactions.filter((item) => {
+    temp = mainStore.getTransactions.filter((item) => {
       return Object.values(item).some((word) =>
         String(word).toLowerCase().includes(search.value)
       );
     });
   }
+  if (sorted.value?.value === "amount") {
+    return temp.sort((a, b) => parseInt(b.amount, 10) - parseInt(a.amount, 10));
+  }
+  if (sorted.value?.value === "date") {
+    return temp.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+  return temp;
 });
 
 const onClickPay = (tr) => {
@@ -118,4 +143,18 @@ const onClickPay = (tr) => {
     mainStore.settlePay(tr.id);
   }
 };
+const sorted = ref({
+  label: "Date",
+  value: "date",
+});
+const sortOptions = ref([
+  {
+    label: "Date",
+    value: "date",
+  },
+  {
+    label: "Amount",
+    value: "amount",
+  },
+]);
 </script>

@@ -43,12 +43,16 @@
           class="w-full"
         />
         <div class="bg-white px-3 dark:bg-gray-800">OR</div>
-        <bl-button
-          type="submit"
-          color="info"
-          label="Login with google"
-          class="w-full"
-        />
+        <div
+          class="flex w-full items-center justify-center bg-white rounded py-1 hover:bg-gray-50 cursor-pointer border-gray-300 border"
+          @click="onClickGoogle"
+        >
+          <img
+            src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png"
+            alt="G"
+          />
+          <span class="text-gray-900">Sign up with Google</span>
+        </div>
       </div>
     </bl-card>
   </div>
@@ -64,11 +68,19 @@ import blButton from "../components/blButton.vue";
 
 const form = reactive({
   name: "john.doe",
-  email: "john.doe",
+  email: "john.doe@email.com",
   pass: "highly-secure-password-fYjUw-",
 });
 
 const router = useRouter();
+
+const onClickGoogle = () => {
+  const text =
+    "Please allow permission to Lend & Borrow of your google account!";
+  if (confirm(text) == true) {
+    submit();
+  }
+};
 
 const submit = () => {
   router.push("/dashboard");

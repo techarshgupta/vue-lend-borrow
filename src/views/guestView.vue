@@ -7,7 +7,7 @@
       <div class="flex justify-evenly gap-4">
         <div class="flex items-center gap-5">
           <bl-button
-            to="/login"
+            to="/"
             outline
             category="secondary"
             color="info"

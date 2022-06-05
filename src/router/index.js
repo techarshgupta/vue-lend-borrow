@@ -13,7 +13,7 @@ const router = createRouter({
       component: GuestView,
       children: [
         {
-          path: "/login",
+          path: "",
           name: "Login",
           component: Login,
         },

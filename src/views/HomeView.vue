@@ -1,17 +1,26 @@
 <script setup>
 import BlList from "../components/blList.vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useMainStore } from "@/stores/main";
 import BlChart from "../components/blChart.vue";
 import blActivity from "../components/blActivity.vue";
-
+import blControl from "../components/blControl.vue";
 const mainStore = useMainStore();
 const getCurrency = computed(() => mainStore.getCurrency);
 const getActivity = computed(() => mainStore.getActivity);
 
 const getTransactions = computed(() => mainStore.getTransactions);
 const getOweTransaction = computed(() => {
-  return getTransactions.value.filter((item) => item.type?.value == "debit");
+  const temp = getTransactions.value.filter(
+    (item) => item.type?.value == "debit"
+  );
+  if (sortOwe.value?.value === "amount") {
+    return temp.sort((a, b) => parseInt(b.amount, 10) - parseInt(a.amount, 10));
+  }
+  if (sortOwe.value?.value === "date") {
+    return temp.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+  return temp;
 });
 const getOweAmt = computed(() => {
   return getOweTransaction.value.reduce((previousValue, currentValue) => {
@@ -19,9 +28,16 @@ const getOweAmt = computed(() => {
   }, 0);
 });
 const getOwedTransaction = computed(() => {
-  return mainStore.getTransactions.filter(
+  const temp = mainStore.getTransactions.filter(
     (item) => item.type?.value == "credit"
   );
+  if (sortOwed.value?.value === "amount") {
+    return temp.sort((a, b) => parseInt(b.amount, 10) - parseInt(a.amount, 10));
+  }
+  if (sortOwed.value?.value === "date") {
+    return temp.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+  return temp;
 });
 const getOwedAmt = computed(() => {
   return getOwedTransaction.value.reduce((previousValue, currentValue) => {
@@ -31,6 +47,25 @@ const getOwedAmt = computed(() => {
 const getTotal = computed(() => {
   return getOwedAmt.value - getOweAmt.value;
 });
+
+const sortOwe = ref({
+  label: "Date",
+  value: "date",
+});
+const sortOwed = ref({
+  label: "Amount",
+  value: "amount",
+});
+const sortOptions = ref([
+  {
+    label: "Date",
+    value: "date",
+  },
+  {
+    label: "Amount",
+    value: "amount",
+  },
+]);
 </script>
 
 <template>
@@ -97,7 +132,15 @@ const getTotal = computed(() => {
             <div class="text-xl font-semibold uppercase dark:text-gray-400">
               You owe
             </div>
-            <div>Sort</div>
+            <div>
+              <bl-control
+                v-model="sortOwe"
+                :options="sortOptions"
+                name="sort"
+                autocomplete="sort"
+                h="min-content"
+              />
+            </div>
           </header>
           <bl-list
             class="h-[450px] overflow-y-auto w-full border-r-gray-200 border-r dark:border-r dark:border-gray-700"
@@ -111,7 +154,15 @@ const getTotal = computed(() => {
             <div class="text-xl font-semibold uppercase dark:text-gray-400">
               You are owed
             </div>
-            <div>Sort</div>
+            <div>
+              <bl-control
+                v-model="sortOwed"
+                :options="sortOptions"
+                name="sort"
+                autocomplete="sort"
+                h="min-content"
+              />
+            </div>
           </header>
           <bl-list
             class="h-[450px] overflow-y-auto w-full"

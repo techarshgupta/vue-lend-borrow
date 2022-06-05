@@ -11,7 +11,12 @@
       <div class="text-xl my-3 font-semibold">Log In</div>
 
       <bl-field label="Email address" help="Please enter your email">
-        <bl-control v-model="form.login" name="login" autocomplete="username" />
+        <bl-control
+          type="email"
+          v-model="form.login"
+          name="login"
+          autocomplete="username"
+        />
       </bl-field>
 
       <bl-field label="Password" help="Please enter your password">
@@ -39,7 +44,16 @@
           OR
         </div>
       </div>
-      <bl-button type="submit" color="info" label="Login" class="w-full mt-3" />
+      <div
+        class="flex items-center justify-center bg-white mt-8 rounded py-1 hover:bg-gray-50 cursor-pointer border-gray-300 border"
+        @click="onClickGoogle"
+      >
+        <img
+          src="https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png"
+          alt="G"
+        />
+        <span class="text-gray-900">Sign in with Google</span>
+      </div>
     </bl-card>
   </div>
 </template>
@@ -51,14 +65,21 @@ import BlCard from "../components/blCard.vue";
 import BlField from "../components/blField.vue";
 import blControl from "../components/blControl.vue";
 import blButton from "../components/blButton.vue";
-// import blButtons from "../components/blButtons.vue";
 
 const form = reactive({
-  login: "john.doe",
+  login: "john.doe@email.com",
   pass: "highly-secure-password-fYjUw-",
 });
 
 const router = useRouter();
+
+const onClickGoogle = () => {
+  const text =
+    "Please allow permission to Lend & Borrow of your google account!";
+  if (confirm(text) == true) {
+    submit();
+  }
+};
 
 const submit = () => {
   router.push("/dashboard");

@@ -28,6 +28,12 @@
         </div>
       </div>
     </div>
+    <div
+      class="w-full text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700 py-10 h-full text-gray-600 dark:text-gray-400"
+      v-if="data.length === 0"
+    >
+      No items found
+    </div>
   </div>
 </template>
 

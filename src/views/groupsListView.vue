@@ -77,6 +77,12 @@
             />
           </td>
         </tr>
+        <tr
+          class="w-full text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-gray-600 dark:text-gray-400"
+          v-if="getGroups.length === 0"
+        >
+          <td class="py-10" colspan="7">No items found</td>
+        </tr>
       </tbody>
     </table>
     <bl-modal
