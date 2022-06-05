@@ -93,13 +93,40 @@ export const useMainStore = defineStore("main", {
       label: "usd",
       icon: "$",
     },
-    users: [],
+    users: [
+      { id: "5e4xp", label: "Harsh", email: "246harsh@gmail.com" },
+      { id: "4b19j", label: "harsh gupta", email: "246harsh@gmail.com" },
+      { id: "znrrx", label: "Joh Doe", email: "test@gmail.com" },
+      { id: "zpk3h", label: "Milesa", email: "test1@gmail.com" },
+    ],
+    groups: [
+      {
+        id: "5e4xp",
+        name: "Site Workers",
+        type: "Constructions",
+        status: "active",
+      },
+      {
+        id: "4b19j",
+        name: "Electricians",
+        type: "Technicals",
+        status: "active",
+      },
+      { id: "znrrx", name: "Designers", type: "Engineers", status: "inactive" },
+      {
+        id: "zpk3h",
+        name: "Site interiors",
+        type: "Interiors",
+        status: "inactive",
+      },
+    ],
   }),
   getters: {
     doubleCount: (state) => state.counter * 2,
     getTransactions: (state) => state.transactions,
     getCurrency: (state) => state.currenncy,
     getUsers: (state) => state.users,
+    getGroups: (state) => state.groups,
   },
   actions: {
     increment() {

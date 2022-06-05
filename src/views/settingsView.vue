@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useMainStore } from "@/stores/main";
 import blControl from "../components/blControl.vue";
 import blField from "../components/blField.vue";

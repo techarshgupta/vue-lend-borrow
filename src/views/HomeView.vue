@@ -2,6 +2,7 @@
 import BlList from "../components/blList.vue";
 import { computed } from "vue";
 import { useMainStore } from "@/stores/main";
+import BlLinechart from "../components/blLinechart.vue";
 
 const mainStore = useMainStore();
 const getCurrency = computed(() => mainStore.getCurrency);
@@ -33,7 +34,7 @@ const getTotal = computed(() => {
 <template>
   <div>
     <div class="flex w-full gap-4 mb-4">
-      <div class="w-10/12 p-4">
+      <div class="w-10/12 p-4 pb-0">
         <div class="flex justify-between items-center gap-3">
           <router-link
             to="/expense"
@@ -48,7 +49,7 @@ const getTotal = computed(() => {
             settle up
           </router-link>
         </div>
-        <div class="flex my-4 gap-4 mt-12">
+        <div class="flex items-end gap-4 pt-5 mt-5">
           <div
             class="flex flex-col border border-gray-200 p-4 rounded-md shadow-md w-full text-center dark:border-gray-800 dark:shadow-gray-800"
           >
@@ -81,7 +82,9 @@ const getTotal = computed(() => {
           </div>
         </div>
       </div>
-      <div class="w-2/5 bg-yellow-300">red</div>
+      <div class="w-2/5 border shadow-md">
+        <bl-linechart />
+      </div>
     </div>
     <div class="flex w-full gap-4 py-5">
       <div

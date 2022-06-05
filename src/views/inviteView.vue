@@ -10,7 +10,11 @@
     </p>
     <p class="text-red-500 leading-relaxed mb-5">{{ errMsg }}</p>
     <bl-field label="Name *" help="Please enter name">
-      <bl-control v-model="form.name" name="name" autocomplete="current-name" />
+      <bl-control
+        v-model="form.label"
+        name="name"
+        autocomplete="current-name"
+      />
     </bl-field>
 
     <bl-field label="Email *" help="Please enter email">
@@ -42,11 +46,11 @@ import { useRouter } from "vue-router";
 const errMsg = ref("");
 const form = reactive({
   id: Math.random().toString(36).substr(2, 5),
-  name: "",
+  label: "",
   email: "",
 });
 const validator = () => {
-  if (!form.name && form.name == "") {
+  if (!form.label && form.label == "") {
     errMsg.value = "Please enter name";
     return false;
   }

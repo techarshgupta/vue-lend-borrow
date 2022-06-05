@@ -42,7 +42,12 @@ const router = createRouter({
         {
           path: "/groups",
           name: "Group",
-          component: () => import("../views/groupsView.vue"),
+          component: () => import("../views/groupsListView.vue"),
+        },
+        {
+          path: "/add-group",
+          name: "Add Group",
+          component: () => import("../views/addGroup.vue"),
         },
         {
           path: "/settings",
