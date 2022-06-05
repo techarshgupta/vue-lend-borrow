@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-12">
     <h2
       class="text-gray-900 text-lg mb-1 font-medium title-font dark:text-gray-200"
     >

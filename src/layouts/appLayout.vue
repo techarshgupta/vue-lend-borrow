@@ -12,7 +12,7 @@ import { RouterView } from "vue-router";
     /> -->
     <sidebar />
     <div class="wrapper click-collapse">
-      <div class="body pt-12 px-4 bg-white dark:bg-gray-900 h-screen">
+      <div class="body pt-12 px-4 bg-white dark:bg-gray-900 min-h-screen">
         <RouterView />
       </div>
     </div>

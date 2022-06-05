@@ -11,7 +11,13 @@
         v-for="(link, index) in navLinks"
         :key="index"
         :to="link.path"
-        class="flex items-center text-gray-600 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-400 pl-2 pr-6 rounded-lg"
+        class="flex items-center text-gray-600 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-teal-400 dark:hover:text-teal-100 pl-2 pr-6 rounded-lg"
+        :class="
+          index == active
+            ? 'bg-gray-300 dark:text-teal-100 dark:bg-teal-600'
+            : ''
+        "
+        @click="active = index"
       >
         <bl-icon
           v-if="link.icon"
@@ -35,6 +41,7 @@ import {
   mdiHome,
   mdiLogout,
 } from "@mdi/js";
+const active = ref(0);
 const navLinks = ref([
   {
     icon: mdiHome,

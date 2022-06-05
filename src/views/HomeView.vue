@@ -3,9 +3,11 @@ import BlList from "../components/blList.vue";
 import { computed } from "vue";
 import { useMainStore } from "@/stores/main";
 import BlLinechart from "../components/blLinechart.vue";
+import blActivity from "../components/blActivity.vue";
 
 const mainStore = useMainStore();
 const getCurrency = computed(() => mainStore.getCurrency);
+const getActivity = computed(() => mainStore.getActivity);
 
 const getTransactions = computed(() => mainStore.getTransactions);
 const getOweTransaction = computed(() => {
@@ -100,7 +102,7 @@ const getTotal = computed(() => {
             <div>Sort</div>
           </header>
           <bl-list
-            class="h-[450px] overflow-scroll w-full"
+            class="h-[450px] overflow-y-auto w-full"
             :data="getOweTransaction"
           ></bl-list>
         </div>
@@ -114,25 +116,25 @@ const getTotal = computed(() => {
             <div>Sort</div>
           </header>
           <bl-list
-            class="h-[450px] overflow-scroll w-full"
+            class="h-[450px] overflow-y-auto w-full"
             :data="getOwedTransaction"
           ></bl-list>
         </div>
       </div>
       <div class="w-2/5 py-4">
-        <div class="w-full shadow-md">
+        <div class="w-full shadow-md dark:border-gray-800 dark:shadow-gray-800">
           <header
-            class="flex justify-between items-center border p-4 rounded-tl-md rounded-tr-md shadow-[0_3px_5px_-5px_#333]"
+            class="flex justify-between items-center p-4 rounded-tl-md rounded-tr-md shadow-[0_3px_5px_-5px_#333] dark:border-gray-800 dark:shadow-gray-800 dark:bg-gray-800"
           >
             <div class="text-xl font-semibold dark:text-gray-400">
               Recent Activity
             </div>
             <div>Sort</div>
           </header>
-          <!-- <bl-list
-            class="h-[450px] overflow-scroll w-full"
-            :data="data"
-          ></bl-list> -->
+          <bl-activity
+            class="h-[450px] overflow-y-auto w-full"
+            :data="getActivity"
+          ></bl-activity>
         </div>
       </div>
     </div>

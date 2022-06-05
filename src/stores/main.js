@@ -120,6 +120,30 @@ export const useMainStore = defineStore("main", {
         status: "inactive",
       },
     ],
+    activities: [
+      {
+        type: "group",
+        title: "You created group",
+        date: "2022-06-05",
+      },
+      {
+        type: "group",
+        title: "You added people in group",
+        date: "2022-06-05",
+      },
+      {
+        type: "credit",
+        title: "You settled amount",
+        amount: "1234",
+        date: "2022-06-05",
+      },
+      {
+        type: "debit",
+        title: "You added transaction",
+        amount: "1232",
+        date: "2022-06-05",
+      },
+    ],
   }),
   getters: {
     doubleCount: (state) => state.counter * 2,
@@ -127,6 +151,7 @@ export const useMainStore = defineStore("main", {
     getCurrency: (state) => state.currenncy,
     getUsers: (state) => state.users,
     getGroups: (state) => state.groups,
+    getActivity: (state) => state.activities,
   },
   actions: {
     increment() {
@@ -148,6 +173,12 @@ export const useMainStore = defineStore("main", {
     },
     addUser(data) {
       this.users.push(data);
+    },
+    addGroup(data) {
+      this.groups.push(data);
+    },
+    addActivity(data) {
+      this.activities.push(data);
     },
   },
   persist: true,

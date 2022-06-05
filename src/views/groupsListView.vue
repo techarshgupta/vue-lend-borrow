@@ -1,29 +1,39 @@
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="p-4">
-      <label for="table-search" class="sr-only">Search</label>
-      <div class="relative mt-1">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-        >
-          <svg
-            class="w-5 h-5 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+    <div class="p-4 flex items-center justify-between">
+      <div>
+        <label for="table-search" class="sr-only">Search</label>
+        <div class="relative mt-1">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
           >
-            <path
-              fill-rule="evenodd"
-              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+            <svg
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="table-search"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-80 pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+            placeholder="Search for items"
+          />
         </div>
-        <input
-          type="text"
-          id="table-search"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-80 pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-          placeholder="Search for items"
+      </div>
+      <div>
+        <bl-button
+          color="info"
+          label="Create Group"
+          class="px-6"
+          @click="onAddGroup"
         />
       </div>
     </div>
@@ -56,7 +66,7 @@
           <td class="px-6 py-4 capitalize">{{ group.status }}</td>
           <td class="px-6 py-4 capitalize">
             <bl-button
-              :disabled="group.status === 'inactive'"
+              :disabled="group.status.toLowerCase() === 'inactive'"
               type="submit"
               color="info"
               outline
@@ -72,7 +82,7 @@
 
 <script setup>
 import blButton from "../components/blButton.vue";
-
+import { useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
 import { computed } from "vue";
 const mainStore = useMainStore();
@@ -86,4 +96,8 @@ const getGroups = computed(() => mainStore.getGroups);
 //     mainStore.settlePay(id);
 //   }
 // };
+const router = useRouter();
+const onAddGroup = () => {
+  router.push({ path: "/add-group" });
+};
 </script>
