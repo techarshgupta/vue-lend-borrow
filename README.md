@@ -1,35 +1,113 @@
-# vue-lend-borrow
+# Lend & Borrow
 
-This template should help get you started developing with Vue 3 in Vite.
+People have a habit of borrowing money from each other frequently, and have trouble remembering who owes whom, and how much.
 
-## Recommended IDE Setup
+![Logo](./src/assets/images/dashboard.png)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Tech Stack
 
-## Customize configuration
+**Client:** Vue 3, Vite, Tailwind, Vuex, Vue Router, Eslint, Prettier
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+## Demo
 
-```sh
-npm install
+https://techarshgupta.github.io/vue-lend-borrow/dashboard
+
+
+## Features
+
+- Light/dark mode toggle
+- Cross platform
+- Login/Signup using Google
+- Add transactions
+- Settle transactions
+- Invite peoples
+- Create Groups
+- Dashboards for transactions
+- Log activity
+
+
+
+
+## Roadmap
+
+- Additional browser support
+- Add more integrations
+- Dashboards
+- Email Notification
+- Emails to notify for settle amount
+- Multi Roles
+- Admin Dashboards
+- Approval workflows
+
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/techarshgupta/vue-lend-borrow
 ```
 
-### Compile and Hot-Reload for Development
+Go to the project directory
 
-```sh
-npm run dev
+```bash
+  cd vue-lend-borrow
 ```
 
-### Compile and Minify for Production
+Install dependencies
 
-```sh
-npm run build
+```bash
+  npm install
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Start the server
 
-```sh
-npm run lint
+```bash
+  npm run dev
 ```
+
+Run test cases
+```bash
+  npm run test
+```
+
+Lint with Eslint
+
+```bash
+  npm run lint
+```
+
+## Images
+
+**Login**
+![Logo](./src/assets/images/login.png)
+
+**Sign Up**
+![Logo](./src/assets/images/signup.png)
+
+**Groups**
+![Logo](./src/assets/images/groups.png)
+
+**Create Group**
+![Logo](./src/assets/images/createGroup.png)
+
+**Settings**
+![Logo](./src/assets/images/settings.png)
+
+**Invite** **Peoples**
+![Logo](./src/assets/images/invite.png)
+
+**Add** **Transactions**
+![Logo](./src/assets/images/transaction.png)
+
+**Settle** **Transaction**
+![Logo](./src/assets/images/settle.png)
+
+**Logout**
+![Logo](./src/assets/images/logout.png)
+
+## Feedback
+
+If you have any feedback, please reach out to us at 246harsh@gmail.com

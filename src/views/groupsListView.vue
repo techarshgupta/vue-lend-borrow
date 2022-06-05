@@ -1,5 +1,13 @@
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <h2
+      class="text-gray-900 text-lg mb-1 font-medium title-font dark:text-gray-200"
+    >
+      Groups
+    </h2>
+    <p class="leading-relaxed mb-1 text-gray-600 dark:text-gray-200">
+      Add peoples in listed groups or create new group using "Create Group"
+    </p>
     <div class="py-4 flex items-center justify-between">
       <div>
         <label for="table-search" class="sr-only">Search</label>
