@@ -2,7 +2,7 @@
 import BlList from "../components/blList.vue";
 import { computed } from "vue";
 import { useMainStore } from "@/stores/main";
-import BlLinechart from "../components/blLinechart.vue";
+import BlChart from "../components/blChart.vue";
 import blActivity from "../components/blActivity.vue";
 
 const mainStore = useMainStore();
@@ -87,7 +87,7 @@ const getTotal = computed(() => {
       <div
         class="w-2/5 border shadow-md rounded dark:border-gray-800 dark:shadow-gray-800 p-4"
       >
-        <bl-linechart />
+        <bl-chart />
       </div>
     </div>
     <div class="flex w-full py-5">

@@ -181,11 +181,17 @@ export const useMainStore = defineStore("main", {
       this.currenncy = val;
       if (this.currenncy.label.toLowerCase() === "usd") {
         this.transactions = this.transactions.map((item) => {
-          return { ...item, amount: parseInt(item.amount, 10) / 70 };
+          return {
+            ...item,
+            amount: (parseInt(item.amount, 10) / 70).toFixed(2),
+          };
         });
       } else {
         this.transactions = this.transactions.map((item) => {
-          return { ...item, amount: parseInt(item.amount, 10) * 70 };
+          return {
+            ...item,
+            amount: (parseInt(item.amount, 10) * 70).toFixed(2),
+          };
         });
       }
     },
